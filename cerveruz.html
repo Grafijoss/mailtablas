@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+    <meta charset="utf-8">
+    <!-- utf-8 works for most cases -->
+    <meta name="viewport" content="width=device-width">
+    <!-- Forcing initial-scale shouldn't be necessary -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Use the latest (edge) version of IE rendering engine -->
+    <meta name="x-apple-disable-message-reformatting">
+    <!-- Disable auto-scale in iOS 10 Mail entirely -->
+    <title></title>
+    <!-- The title tag shows in email notifications, like Android 4.4. -->
+
+    <!-- Web Font / @font-face : BEGIN -->
+    <!-- NOTE: If web fonts are not required, lines 10 - 27 can be safely removed. -->
+
+    <!-- Desktop Outlook chokes on web font references and defaults to Times New Roman, so we force a safe fallback font. -->
+    <!--[if mso]>
+    <style>
+        * {
+            font-family: sans-serif !important;
+        }
+    </style>
+    <![endif]-->
+
+    <!-- All other clients get the webfont reference; some will render the font and others will silently fail to the fallbacks. More on that here: http://stylecampaign.com/blog/2015/02/webfont-support-in-email/ -->
+    <!--[if !mso]><!-->
+    <!-- insert web font reference, eg: <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'> -->
+    <!--<![endif]-->
+
+    <!-- Web Font / @font-face : END -->
+
+    <!-- CSS Reset -->
+    <style>
+        /* What it does: Remove spaces around the email design added by some email clients. */
+        /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+        
+        html,
+        body {
+            margin: 0 auto !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+        }
+        /* What it does: Stops email clients resizing small text. */
+        
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+        /* What it does: Centers email on Android 4.4 */
+        
+        div[style*="margin: 16px 0"] {
+            margin: 0 !important;
+        }
+        /* What it does: Stops Outlook from adding extra spacing to tables. */
+        
+        table,
+        td {
+            mso-table-lspace: 0pt !important;
+            mso-table-rspace: 0pt !important;
+        }
+        /* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
+        
+        table {
+            border-spacing: 0 !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            margin: 0 auto !important;
+        }
+        
+        table table table {
+            table-layout: auto;
+        }
+        /* What it does: Uses a better rendering method when resizing images in IE. */
+        
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+        /* What it does: A work-around for iOS meddling in triggered links. */
+        
+        *[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        /* What it does: A work-around for Gmail meddling in triggered links. */
+        
+        .x-gmail-data-detectors,
+        .x-gmail-data-detectors *,
+        .aBn {
+            border-bottom: 0 !important;
+            cursor: default !important;
+        }
+        /* What it does: Prevents Gmail from displaying an download button on large, non-linked images. */
+        
+        .a6S {
+            display: none !important;
+            opacity: 0.01 !important;
+        }
+        /* If the above doesn't work, add a .g-img class to any image in question. */
+        
+        img.g-img+div {
+            display: none !important;
+        }
+        /* What it does: Prevents underlining the button text in Windows 10 */
+        
+        .button-link {
+            text-decoration: none !important;
+        }
+        /* What it does: Removes right gutter in Gmail iOS app: https://github.com/TedGoas/Cerberus/issues/89  */
+        /* Create one of these media queries for each additional viewport size you'd like to fix */
+        /* Thanks to Eric Lepetit @ericlepetitsf) for help troubleshooting */
+        
+        @media only screen and (min-device-width: 375px) and (max-device-width: 413px) {
+            /* iPhone 6 and 6+ */
+            .email-container {
+                min-width: 375px !important;
+            }
+        }
+
+    </style>
+
+    <!-- Progressive Enhancements -->
+    <style>
+        /* What it does: Hover styles for buttons */
+        
+        .button-td,
+        .button-a {
+            transition: all 100ms ease-in;
+        }
+        
+        .button-td:hover,
+        .button-a:hover {
+            background: #292B34 !important;
+            border-color: #292B34 !important;
+        }
+        /* Media Queries */
+        
+        @media screen and (max-width: 480px) {
+            /* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
+            .fluid {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: auto !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+            .first-line {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            /* What it does: Forces table cells into full-width rows. */
+            .stack-column,
+            .stack-column-center {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                direction: ltr !important;
+            }
+            .stack-column.duo {
+                display: inline-block !important;
+                width: 50% !important;
+                min-width: 50px !important;
+                max-width: 200px !important;
+            }
+            .stack-column-center.duo {
+                width: 60% !important;
+                display: inline-block !important;
+            }
+            .stack-column-center.duo.img {
+                width: 15% !important;
+            }
+            /* And center justify these ones. */
+            .stack-column-center {
+                text-align: left !important;
+                padding-left: 10px !important;
+            }
+            .mitigo {
+                padding-left: 0 !important;
+            }
+            /* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
+            .center-on-narrow {
+                text-align: center !important;
+                display: block !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                float: none !important;
+            }
+            table.center-on-narrow {
+                display: inline-block !important;
+            }
+            .planDetails {
+                padding-left: 28% !important;
+                text-align: left !important;
+            }
+            .pagarButton {
+                text-align: center !important;
+                padding-right: 0 !important;
+            }
+        }
+
+    </style>
+
+    <!-- What it does: Makes background images in 72ppi Outlook render at correct size. -->
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+
+</head>
+
+<body width="100%" bgcolor="#FFFFFF" style="margin: 0; mso-line-height-rule: exactly;">
+    <center style="width: 100%; background: #FAFCFF; text-align: left;">
+
+
+        <!--
+        Set the email width. Defined in two places:
+        1. max-width for all clients except Desktop Windows Outlook, allowing the email to squish on narrow but never go wider than 520px.
+        2. MSO tags for Desktop Windows Outlook enforce a 520px width.
+        Note: The Fluid and Responsive templates have a different width (600px). The hybrid grid is more "fragile", and I've found that 520px is a good width. Change with caution.
+    -->
+        <div style="max-width: 520px; margin: auto;" class="email-container">
+            <!--[if mso]>
+        <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="520"
+               align="center">
+            <tr>
+                <td>
+        <![endif]-->
+
+            <!-- Email Header : BEGIN -->
+            <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 520px; ">
+                <tr>
+                    <td style="background: white; padding: 20px 5px 20px 30px; width: 80%">
+                         <h3 style="margin: 0; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #292B34; font-weight: 300;">
+                            Bienvenido</h3>
+                        <h1 style="margin: 0; font-family: sans-serif; font-size: 24px; line-height: 24px; color: #00377B; font-weight: 300;">
+                            Cristian Castellanos</h1>
+                    </td>
+
+                    <td style="background: white; padding: 18px 0; width: 20%">
+                        <img src="http://sites.une.com.co/mail/img/tigo.png" aria-hidden="true" width="80" height="" alt="alt_text" border="0" style="margin-left:5%; width: 80%; max-width: 100px; height: auto; background: transparent; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #292B34;">
+                    </td>
+                </tr>
+            </table>
+            <!-- Email Header : END -->
+
+            <!-- Email Body : BEGIN -->
+            <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 520px;" class="email-container">
+
+                <!-- Hero Image, Flush : BEGIN -->
+                <tr>
+                    <td bgcolor="#ffffff">
+                        <img src="https://marketing-image-production.s3.amazonaws.com/uploads/10ac0580758c19a611027320f9951255a9373dbce291d6118dfd62e3443d6eff3d75e5006586ea441b25b431b30b11a62593162b1d5d968b1b4ae8d71f676834.jpg" aria-hidden="true" width="520" height="" alt="alt_text" border="0" align="center" class="fluid" style="width: 100%; max-width: 520px; height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #292B34;" class="g-img">
+                    </td>
+                </tr>
+                <!-- Hero Image, Flush : END -->
+
+                <!-- 1 Column Text + Button : BEGIN -->
+                <tr>
+                    <td bgcolor="#959595">
+                        <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 520px">
+                            <tr>
+                                <td valign="middle" style="padding: 5px 5px 5px; text-align: center;">
+                                    <span style="vertical-align: middle; margin: 0; font-family: sans-serif; font-size: 14px; line-height: 14px; color: white; font-weight: 300;">Ya está disponible tu factura del mes de febrero. Págala fácil y rápido en línea.</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- 1 Column Text + Button : END -->
+
+                 <!-- 1 Column Text + Button : BEGIN -->
+                <tr>
+                    <td bgcolor="#ffffff" style="padding-top: 20px">
+                        <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 500px; margin:0 10px; border-right: solid 1px #E8E9EB; border-left: solid 1px #E8E9EB; border-bottom: solid 1px #E8E9EB; border-top: solid 4px #43C7F4;">
+                            <tr>
+                                <td style="padding: 5px 20px 5px; font-family: sans-serif; font-size: 15px; line-height: 20px; text-align: center; ">
+
+                                 <span style="vertical-align: middle; margin: 0; font-family: sans-serif; font-size: 14px; line-height: 27px; color: #707682; font-weight: 300;"> <span><img
+                                        style="margin-right: 10px; margin-top: 5px"
+                                        src="https://www.une.com.co/images/mails/phone.png"></span><span>Tu línea: <span
+                                        style="color: #292B34">(300) 851-6643</span></span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- 1 Column Text + Button : END -->
+
+                
+                 <!-- 1 Column Text + Button : BEGIN -->
+                <tr>
+                    <td bgcolor="#ffffff">
+                        <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 500px; margin:0 10px; border-right: solid 1px #E8E9EB; border-left: solid 1px #E8E9EB; border-bottom: solid 1px #E8E9EB">
+                            <tr>
+                                <td style="padding: 20px 20px 20px; font-family: sans-serif; font-size: 15px; line-height: 22px; text-align: center; ">
+
+                                 <span style="vertical-align: middle; margin: 0; font-family: sans-serif; font-size: 14px; color: #707682; font-weight: 300;">Valor a pagar</span>
+                                    <br>
+                                    <span style="vertical-align: middle; margin: 0; font-family: sans-serif; font-size: 30px;  color: #292B34; font-weight: 400;">$110.000</span>
+                                    <br><br>
+                                     <span style="vertical-align: middle; margin: 0; font-family: sans-serif; font-size: 14px; line-height: 20px; color: #707682; font-weight: 300;">Período facturado: 04/Jun/2017 - 03/Jun/2017</span>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- 1 Column Text + Button : END -->
+
+                <!-- 2 Even Columns : BEGIN -->
+                <tr>
+                    <td bgcolor="#ffffff" align="center" height="100%" valign="top" width="100%">
+                        <!--[if mso]>
+                    <table role="presentation" aria-hidden="true" border="0" cellspacing="0" cellpadding="0"
+                           align="center" width="500">
+                        <tr>
+                            <td align="center" valign="top" width="500">
+                    <![endif]-->
+                           <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 500px; margin:0 10px; border-right: solid 1px #E8E9EB; border-left: solid 1px #E8E9EB; border-bottom: solid 1px #E8E9EB">
+                            <tr>
+                               
+                                  <td style="padding: 0 10px 0; font-family: sans-serif; font-size: 15px; line-height: 20px;">
+                                    <!--[if mso]>
+                                <table role="presentation" aria-hidden="true" border="0" cellspacing="0" cellpadding="0"
+                                       align="center" width="500">
+                                    <tr>
+                                        <td align="left" valign="top" width="250">
+                                <![endif]-->
+                                    <div style="display:inline-block; padding-bottom: 5px; margin: 0 -2px; width:50%;  max-width:210px; vertical-align:top;" class="stack-column duo">
+                                        <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 210px">
+                                            <tr>
+                                                <td style="padding: 0 5px;">
+                                                    <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 210px; font-size: 14px;text-align: left;">
+                                                        <tr>
+                                                            <td style="font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding-top: 5px;text-align: right; width: 20%" class="stack-column-center duo img">
+                                                                <img src="http://sites.une.com.co/mail/img/flimite.png">
+                                                            </td>
+                                                            <td style="width: 70%; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding-top: 5px;" class="stack-column-center duo">
+                                                                <small style="color: #707682; font-size: 12px; ">Fecha
+                                                                límite
+                                                                de pago:
+                                                            </small>
+                                                                <p style="margin: 0; font-size: 14px; line-height: 14px; color: #292B34;">
+                                                                    10/05/2017</p>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!--[if mso]>
+                                </td>
+                                <td align="left" valign="top" width="250">
+                                <![endif]-->
+                                    <div style="display:inline-block;padding-bottom: 5px; margin: 0 -2px; width:50%;  max-width:210px; vertical-align:top;" class="stack-column duo">
+                                        <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 210px;">
+                                            <tr>
+                                                <td style="padding: 0 10px;">
+                                                    <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px;text-align: left; max-width: 210px;">
+                                                        <tr>
+                                                            <td style="font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding-top: 5px; text-align: right; width: 20%" class="stack-column-center duo img">
+                                                                <img src="http://sites.une.com.co/mail/img/referente.png">
+                                                            </td>
+                                                            <td style="width: 70%; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding-top: 5px;" class="stack-column-center duo">
+                                                                <small style="color: #707682; font-size: 12px; ">Referente
+                                                                de pago:
+                                                            </small>
+                                                                <p style="margin: 0; font-size: 14px; line-height: 14px; color: #292B34;">
+                                                                    354869</p>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!--[if mso]>
+                                </td>
+                                </tr>
+                                </table>
+                                <![endif]-->
+                                </td>
+                            </tr>
+                        </table>
+                        <!--[if mso]>
+                    </td>
+                    </tr>
+                    </table>
+                    <![endif]-->
+                    </td>
+                </tr>
+                <!-- 2 Even Columns : END -->
+                
+                <!-- 1 Column Text + Button : BEGIN -->
+                <tr>
+                    <td bgcolor="#ffffff">
+                        <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 500px; margin:0 10px; border-right: solid 1px #E8E9EB; border-left: solid 1px #E8E9EB; border-bottom: solid 1px #E8E9EB">
+                            <tr>
+                                <td style="padding: 20px 20px 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; text-align: center; ">
+
+                                  <a href="www.tigo.com.co/tigo/pago_factura?client_id=8228a893ce8e053212bdce578f83b9cd&amp;msisdn=sub_linea"><img src="http://sites.une.com.co/mail/img/pagaTigo.png"></a>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- 1 Column Text + Button : END -->
+
+                <!-- 1 Column Text + Button : BEGIN -->
+                <tr>
+                    <td bgcolor="#ffffff">
+                        <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 500px; margin:0 10px; border-right: solid 1px #E8E9EB; border-left: solid 1px #E8E9EB; border-bottom: solid 1px #E8E9EB">
+                            <tr>
+                                <td style="padding: 20px 20px 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; text-align: center; ">
+
+                                    <span style="vertical-align: middle; margin: 0; font-family: sans-serif; font-size: 14px; line-height: 14px; color: #707682; font-weight: 300;">Ahorra tiempo programando el pago de tu factura con tu tarjeta de crédito. <a target="_blank" href="ayuda.tigoune.co/hc/es/articles/115004839348-Medios-de-pago" style="text-decoration: none; color: #43C7F4">Aprende como</a></span>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- 1 Column Text + Button : END -->
+                
+                
+                <!-- 1 Column Text + Button : BEGIN -->
+                
+                <tr>
+                    <td bgcolor="#ffffff">
+                        <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 500px; margin:0 10px;  border-bottom: solid 1px #E8E9EB">
+                            <tr>
+                                <td style="padding: 30px 20px 30px; font-family: sans-serif; font-size: 15px; line-height: 20px; text-align: center; ">
+
+                                    <h3 style="font-size: 16px; margin: 5px 0 10px; font-family: sans-serif; vertical-align: middle; font-weight: 400; color: #292B34">¿Tienes dudas?</h3>
+
+
+                                    <a target="_blank" href="ayuda.tigoune.co/hc/es"><img style="margin-top: 10px; height: 36px" src="http://sites.une.com.co/mail/img/ayuda.png"></a>
+                                    <a target="_blank" href="www.tigo.com.co/chat?campaign=FacturaMovil"><img style="padding-left: 10px; margin-top: 10px height: 36px" src="http://sites.une.com.co/mail/img/chatea.png"></a>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- 1 Column Text + Button : END -->            
+
+            </table>
+            <!-- Email Body : END -->
+
+            <!-- Email Footer : BEGIN -->
+            <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 520px;">
+   <!-- 1 Column Text + Button : BEGIN -->
+                <tr>
+                    <td bgcolor="#00377B">
+                        <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 500px; margin:0 10px;">
+                            <tr>
+                                <td style="padding: 30px 20px 30px; font-family: sans-serif; font-size: 15px;  text-align: center; ">
+
+                                    <h3 style="font-size: 20px; margin: 5px 0 10px; font-family: sans-serif; vertical-align: middle; font-weight: 300; color: #FFFFFF">Consulta el detalle historico de tu factura, descarga:</h3>
+
+                                    <img style=" margin-top: 15px" src="http://sites.une.com.co/mail/img/mitigo.png">
+
+                                    <h3 style="font-size: 12px; margin: 5px 0 10px; font-family: sans-serif; vertical-align: middle; font-weight: 300; color: #FFFFFF">Disponible en:</h3>
+                                    <br>
+                                    <a href="itunes.apple.com/co/app/mi-tigo-colombia/id787301638?mt=8" target="_blank"><img style="margin-top: 5px" src="http://sites.une.com.co/mail/img/appstore.png"> </a>
+                                    <a href="play.google.com/store/apps/details?id=com.tigo.tigoapp&hl=es_419" target="_blank"><img style="padding-left: 10px; margin-top: 5px" src="http://sites.une.com.co/mail/img/playstore.png"></a>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- 1 Column Text + Button : END -->
+
+                <tr>
+                    <td style="padding: 10px 10px;width: 100%;font-size: 14px; font-family: sans-serif; line-height:18px; text-align: center;  " class="x-gmail-data-detectors">
+
+                         <p style="font-size: 8px; line-height: 10px; color: #707682;">Tigo Copyright ©. Colombia Móvil S.A E.S.P. 
+                            
+                            <br> Todos los derechos reservados. <a target="_blank" href="http://www.tigo.com.co/terminos-y-condiciones" style="text-decoration: none; color: #43C7F4">Términos y condiciones de uso.</a></p>
+
+                    </td>
+                </tr>
+            </table>
+            <!-- Email Footer : END -->
+
+            <!--[if mso]>
+        </td>
+        </tr>
+        </table>
+        <![endif]-->
+        </div>
+    </center>
+</body>
+
+</html>
